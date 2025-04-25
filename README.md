@@ -1,4 +1,4 @@
-# Brain MRI Anomaly Detection with Convolutional Autoencoders
+# Unsupervised Brain MRI Anomaly Detection with Convolutional Autoencoders
 
 This project implements a convolutional autoencoder in TensorFlow/Keras that can detect anomalies such as tumors in brain MRI images.
 
@@ -45,7 +45,7 @@ The model wasn't able to reconstruct tumor images and capture details. This mean
 
 ### Establishing a threshold
 
-Normal validation data was passed into the trained autoencoder model. 
+I wanted to establish the threshold based on normal data that was unseen by the model during training. This would show how well the model was able to generalize on unseen images.
 
 ![Normal Valid Data Reconstruction Error Distribution](assets/normal_valid_loss_distribution.png)
 
