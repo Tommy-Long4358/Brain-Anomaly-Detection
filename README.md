@@ -6,7 +6,7 @@ This project implements a convolutional autoencoder in TensorFlow/Keras that can
 Autoencoders can learn the latent features of an image through its encoder stage and use those latent features to reconstruct the same image in the decoder stage. Comparing the reconstructed image with the original image is what gives us the reconstruction loss.
 
 ## Goal
-The goal of this project is to be able to identify images as anomalies based on a threshold found from the reconstruction loss distribution. Ideally, normal images should have a low reconstruction error that is below the threshold while tumorous images should have a high reconstruction error that is above the threshold.
+The goal of this project is to be able to identify images as anomalies based on a threshold found from the reconstruction loss distribution. This is an unsupervised learning task, meaning that the model was not given any labels during training. In order for the model to be able to distinguish between both types of images, normal images should have a low reconstruction error that is below the threshold while tumorous images should have a high reconstruction error that is above the threshold.
 
 ## Dataset
 
@@ -54,19 +54,17 @@ The following formula was used to generate the threshold-value: `threshold = np.
 The following distribution was generated after passing in normal test data into the model:
 ![Normal Data Reconstruction Error Distribution](assets/normal_test_loss_distribution.png)
 
-Reconstruction error that is to the left of the threshold are labeled as normal images. The model was able to label a majority of the normal testing images as normal.
+The model was able to label a majority of the normal testing images as normal.
 
 ### Inference on tumor images
 
-When passing in tumor images, reconstruction loss was a lot higher than the threshold-value; These were labeled as anomalies:
-
 ![Tumor Data Reconstruction Error Distribution](assets/tumor_loss_distribution.png)
 
-Recontruction error to the right of the threshold are labeled as anomalous.
+The model was able to label a majority of the tumor testing images as tumors.
 
 ### Inference on tumor + healthy image dataset
 
-Given the results of how it performed separately on exclusively tumor or healthy images, I wanted to evaluate how the model would do if I gave it a test dataset filled with 50% normal and 50% tumor images. The model was able to achieve 80-90% accuracy in being able to distinguish between tumor and healthy images based on reconstruction loss and threshold.
+I wanted to evaluate how the model would do if I gave it a test dataset filled with 50% normal and 50% tumor images. The model was able to achieve 80-90% accuracy in being able to distinguish between tumor and healthy images
 
 ![Confusion Matrix Test Dataset](assets/cm_test_data.png)
 
