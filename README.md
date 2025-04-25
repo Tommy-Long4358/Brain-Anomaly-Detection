@@ -2,6 +2,12 @@
 
 This project implements a convolutional autoencoder in TensorFlow/Keras that can detect anomalies such as tumors in brain CT images.
 
+## Overview of autoencoders
+The goal of an autoencoder is to be able to reconstruct images based on the latent features it has learned from the input image. The architecture of an autoencoder consists of an encoder and decoder. The encoder takes in an image as input and learns it latent features of what makes a brain CT image healthy. Afterwards, the decoder takes the latent features that the encoder has learned and tries to reconstruct an image that closely matches the input image. The difference between the reconstruction and original image is the reconstruction error.
+
+## Goal
+The goal of this project is to be able to identify images as anomalies based on a threshold. Ideally, normal images should have a low reconstruction error that is below the threshold while tumorous images should have a high reconstruction error that is above the threshold.
+
 ## Dataset
 
 The dataset includes:
@@ -25,7 +31,7 @@ I divided up the dataset into the following splits:
 - Tumor Test Data: 2600 images
 
 ## Training
-The model was trained exclusively on normal brain CT images. This allowed the model to be able to reconstruct normal brain CT images with a low reconstruction error.
+The model was trained exclusively on normal brain CT train images. This allowed the model to be able to reconstruct normal brain CT images with a low reconstruction error.
 
 ![Training Graph](assets/train_results.png)
 
