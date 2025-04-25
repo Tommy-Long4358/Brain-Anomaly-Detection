@@ -65,7 +65,12 @@ Given the results of how it performed separately on exclusively tumor or healthy
 
 ![Confusion Matrix Test Dataset](assets/cm_test_data.png)
 
-## Future Improvements
+## Future Improvements for Accuracy
 - Using a VAE (Variational Autoencoder) instead of a traditional autoencoder
 - Utilizing pre-trained models for the encoder
 - Introducing layers such as BatchNormalization
+- Adding more convolutional layers
+
+## Future Features
+- Making a classifier to classify different types of brain tumors if image is marked as an anomaly
+- Incorporating image segmentation for tumors in an image
