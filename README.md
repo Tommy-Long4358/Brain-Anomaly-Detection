@@ -10,11 +10,13 @@ The dataset includes:
 - Healthy brain MRI scans
 - Tumorous brain MRI scans
 
+My model was trained and tested on healthy and tumorous brain CT scan images.
+
 Link to dataset:
 - [Kaggle] https://www.kaggle.com/datasets/murtozalikhon/brain-tumor-multimodal-image-ct-and-mri
 
 ## Dataset Split
-Using only the healthy and tumorous brain CT scans, I divided up the dataset into the following splits:
+I divided up the dataset into the following splits:
 - Normal train data: 1600 images
 - Normal valid data: 200 images
 - Normal test data: 200 images
