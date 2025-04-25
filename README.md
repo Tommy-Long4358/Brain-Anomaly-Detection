@@ -1,4 +1,4 @@
-# Brain MRI Anomaly Detection with Convolutional Autoencoders
+# Unsupervised Brain MRI Anomaly Detection with Convolutional Autoencoders
 
 This project implements a convolutional autoencoder in TensorFlow/Keras that can detect anomalies such as tumors in brain MRI images.
 
@@ -6,7 +6,7 @@ This project implements a convolutional autoencoder in TensorFlow/Keras that can
 Autoencoders can learn the latent features of an image through its encoder stage and use those latent features to reconstruct the same image in the decoder stage. Comparing the reconstructed image with the original image is what gives us the reconstruction loss.
 
 ## Goal
-The goal of this project is to be able to identify images as anomalies based on a threshold found from the reconstruction loss distribution. Ideally, normal images should have a low reconstruction error that is below the threshold while tumorous images should have a high reconstruction error that is above the threshold.
+The goal of this project is to be able to identify images as anomalies based on a threshold found from the reconstruction loss distribution. This is an unsupervised learning task, meaning that the model was not given any labels during training. In order for the model to be able to distinguish between both types of images, normal images should have a low reconstruction error that is below the threshold while tumorous images should have a high reconstruction error that is above the threshold.
 
 ## Dataset
 
@@ -23,15 +23,14 @@ Link to dataset:
 
 ## Dataset Split
 I divided up the dataset into the following splits:
-- Normal train data: 1600 images
-- Normal valid data: 200 images
-- Normal test data: 200 images
-- Validation Data: 400 images (normal valid data + 200 tumor images)
+- Normal train data: 1400 images
+- Validation Data: 400 images (200 normal images + 200 tumor images)
 - Test Data: 400 images (200 normal images + 200 tumor images)
 - Tumor Test Data: 2600 images
+- Normal data for thresholding: 200 images
 
 ## Training
-The model was trained exclusively on normal brain MRI train images. This allowed the model to be able to reconstruct normal brain MRI images with a low reconstruction error.
+The model was trained exclusively on normal brain MRI train images. This allowed the model to be able to reconstruct normal brain MRI images with a low reconstruction error. I also used a validation set mixed with normal and tumor images to ensure that my model is able to differeniate between the two.
 
 ![Training Graph](assets/train_results.png)
 
@@ -46,7 +45,7 @@ The model wasn't able to reconstruct tumor images and capture details. This mean
 
 ### Establishing a threshold
 
-Normal validation data was passed into the trained autoencoder model. 
+I wanted to establish the threshold based on normal data that was unseen by the model during training. This would show how well the model was able to generalize on unseen images.
 
 ![Normal Valid Data Reconstruction Error Distribution](assets/normal_valid_loss_distribution.png)
 
@@ -55,19 +54,17 @@ The following formula was used to generate the threshold-value: `threshold = np.
 The following distribution was generated after passing in normal test data into the model:
 ![Normal Data Reconstruction Error Distribution](assets/normal_test_loss_distribution.png)
 
-Reconstruction error that is to the left of the threshold are labeled as normal images. The model was able to label a majority of the normal testing images as normal.
+The model was able to label a majority of the normal testing images as normal.
 
 ### Inference on tumor images
 
-When passing in tumor images, reconstruction loss was a lot higher than the threshold-value; These were labeled as anomalies:
-
 ![Tumor Data Reconstruction Error Distribution](assets/tumor_loss_distribution.png)
 
-Recontruction error to the right of the threshold are labeled as anomalous.
+The model was able to label a majority of the tumor testing images as tumors.
 
 ### Inference on tumor + healthy image dataset
 
-Given the results of how it performed separately on exclusively tumor or healthy images, I wanted to evaluate how the model would do if I gave it a test dataset filled with 50% normal and 50% tumor images. The model was able to achieve 80-90% accuracy in being able to distinguish between tumor and healthy images based on reconstruction loss and threshold.
+I wanted to evaluate how the model would do if I gave it a test dataset filled with 50% normal and 50% tumor images. The model was able to achieve 80-90% accuracy in being able to distinguish between tumor and healthy images
 
 ![Confusion Matrix Test Dataset](assets/cm_test_data.png)
 
