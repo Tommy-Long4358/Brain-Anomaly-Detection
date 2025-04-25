@@ -23,15 +23,14 @@ Link to dataset:
 
 ## Dataset Split
 I divided up the dataset into the following splits:
-- Normal train data: 1600 images
-- Normal valid data: 200 images
-- Normal test data: 200 images
-- Validation Data: 400 images (normal valid data + 200 tumor images)
+- Normal train data: 1400 images
+- Validation Data: 400 images (200 normal images + 200 tumor images)
 - Test Data: 400 images (200 normal images + 200 tumor images)
 - Tumor Test Data: 2600 images
+- Normal data for thresholding: 200 images
 
 ## Training
-The model was trained exclusively on normal brain MRI train images. This allowed the model to be able to reconstruct normal brain MRI images with a low reconstruction error.
+The model was trained exclusively on normal brain MRI train images. This allowed the model to be able to reconstruct normal brain MRI images with a low reconstruction error. I also used a validation set mixed with normal and tumor images to ensure that my model is able to differeniate between the two.
 
 ![Training Graph](assets/train_results.png)
 
