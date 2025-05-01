@@ -1,12 +1,12 @@
 # Unsupervised Brain MRI Anomaly Detection with Convolutional Autoencoders
 
-This project implements a convolutional autoencoder in TensorFlow/Keras that can detect anomalies such as tumors in brain MRI images.
+This project implements a convolutional autoencoder in TensorFlow/Keras that can detect anomalies such as tumors in brain MRI images. The encoder uses a pretrained ResNet50 model to perform feature extraction.
 
 ## Overview of Autoencoders
 Autoencoders can learn the latent features of an image through its encoder stage and use those latent features to reconstruct the same image in the decoder stage. Comparing the reconstructed image with the original image is what gives us the reconstruction loss.
 
 ## Goal
-The goal of this project is to be able to identify images as anomalies based on a threshold found from the reconstruction loss distribution. This is an unsupervised learning task, meaning that the model was not given any labels during training. In order for the model to be able to distinguish between both types of images, normal images should have a low reconstruction error that is below the threshold while tumorous images should have a high reconstruction error that is above the threshold.
+The goal of this project is to be able to identify images as anomalies based on a threshold found from the reconstruction loss distribution. This is an unsupervised learning task, meaning that the model was not given any labels during training. In order for the model to be able to distinguish between both types of images, normal images should have a low reconstruction error that is below the threshold while tumorous images should have a high reconstruction error that is above the threshold. A pretrained ResNet50 model was used for the encoder to capture more latent features.
 
 ## Dataset
 
@@ -30,12 +30,12 @@ I divided up the dataset into the following splits:
 - Normal data for thresholding: 200 images
 
 ## Training
-The model was trained exclusively on normal brain MRI train images. This allowed the model to be able to reconstruct normal brain MRI images with a low reconstruction error. I also used a validation set mixed with normal and tumor images to ensure that my model is able to differeniate between the two.
+The model was trained exclusively on normal brain MRI train images. This allowed the model to be able to reconstruct normal brain MRI images with a low reconstruction error. I also used a validation set mixed with normal and tumor images to ensure that my model is able to differeniate between the two. Because ResNet50 is a bigger model with over 20M parameters, I trained the model for around 80 epochs.
 
 ![Training Graph](assets/train_results.png)
 
 ## Inference
-The model was able to reconstruct normal images, but with noise. This means that reconstruction loss was low.
+The model was able to reconstruct normal images, but with noise. It captured some of the important details or outlines. This means that reconstruction loss was low. 
 
 ![Reconstruction Normal Image Output](assets/reconstruction_normal_img.png)
 
@@ -70,6 +70,5 @@ I wanted to evaluate how the model would do if I gave it a test dataset filled w
 
 ## Future Improvements for Accuracy
 - Using a VAE (Variational Autoencoder) instead of a traditional autoencoder
-- Utilizing pre-trained models for the encoder
 - Introducing layers such as BatchNormalization
 - Adding more convolutional layers
