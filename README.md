@@ -64,7 +64,7 @@ The model was able to label a majority of the tumor testing images as tumors.
 
 ### Inference on tumor + healthy image dataset
 
-I wanted to evaluate how the model would do if I gave it a test dataset filled with 50% normal and 50% tumor images. The model was able to achieve 80-90% accuracy in being able to distinguish between tumor and healthy images
+I wanted to evaluate how the model would do if I gave it a test dataset filled with 50% normal and 50% tumor images. The model was able to achieve above 90% accuracy with the pretrained model in being able to distinguish between tumor and healthy images
 
 ![Confusion Matrix Test Dataset](assets/cm_test_data.png)
 
