@@ -162,4 +162,4 @@ cython_debug/
 archive/
 brain-tumor-anomaly-cvae.ipynb
 dataset/
-segmentation.ipynb
+tumor_segmentation.ipynb
